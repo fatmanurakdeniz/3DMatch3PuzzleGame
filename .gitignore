@@ -1,0 +1,12 @@
+build/
+OceanMatch3.xcodeproj/
+.DS_Store
+*.o
+*.out
+*.app
+*.dSYM/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+.cache/
