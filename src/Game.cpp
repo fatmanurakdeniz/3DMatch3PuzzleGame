@@ -89,6 +89,7 @@ bool Game::init() {
   shader = Shader("shaders/tile.vert", "shaders/tile.frag");
   cubeShader = Shader("shaders/cube.vert", "shaders/cube.frag");
   renderer.init(REFERENCE_SIZE, REFERENCE_SIZE, &shader, &cubeShader);
+  oceanBackground.init();
 
   // Input
   inputMgr.init();
@@ -395,6 +396,7 @@ void Game::run() {
     //    outside the 900×900 content region show a solid ocean-blue fill.
     glViewport(0, 0, cachedFBWidth, cachedFBHeight);
     renderer.beginFrame();   // glClear with background colour
+    oceanBackground.render(now, cachedFBWidth, cachedFBHeight);
 
     // 2) Set the fixed-size viewport: exactly REFERENCE_SIZE logical pixels
     //    centred within the framebuffer.  Content is NEVER scaled — it is
@@ -404,8 +406,10 @@ void Game::run() {
     int vpX = (cachedFBWidth - vpSize) / 2;
     int vpY = (cachedFBHeight - vpSize) / 2;
     glViewport(vpX, vpY, vpSize, vpSize);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
-        renderer.drawBoard(board, inputMgr.selRow, inputMgr.selCol, swapAnim, fallAnim, explosionAnim);
+    renderer.drawBoard(board, inputMgr.selRow, inputMgr.selCol, swapAnim,
+                       fallAnim, explosionAnim);
     glfwSwapBuffers(window);
   }
   glfwDestroyWindow(window);

@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "InputManager.h"
 #include "Shader.h"
+#include "background/OceanBackgroundRenderer.h"
 
 // The canonical logical size that all content is authored for.
 // Content is always rendered at exactly this size (1:1 pixels).
@@ -22,6 +23,7 @@ private:
     GLFWwindow*  window   = nullptr;
     Board        board;
     Renderer     renderer;
+    OceanBackgroundRenderer oceanBackground;
     InputManager inputMgr;
     Shader       shader;       // 2D tile shader
     Shader       cubeShader;   // 3D cube shader
